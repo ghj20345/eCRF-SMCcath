@@ -170,15 +170,16 @@ car_delete_module <- function(input, output, session, modal_title, car_to_delete
 ```
 
 ---
-# 향후목표: 타연구에도 빠르게 적용
+# 향후목표
 
 .large[
-방법 1: 흔히쓰는 항목 모듈화해서 코드 한줄로.
+타연구에도 빠르게 적용
+- 흔히쓰는 항목 모듈화해서 코드 한줄로.
 
+- eCRF 빌더. 구글설문처럼 질문 직접 만들어 넣을 수 있도록
 
-방법 2: eCRF 빌더. 구글설문처럼 질문 직접 만들어 넣을 수 있도록
-
-
+분석탭 추가 
+- [jsmodule](https://github.com/jinseob2kim/jsmodule)  모듈 적용
 ]
 
 
