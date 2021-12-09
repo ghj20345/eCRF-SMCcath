@@ -26,12 +26,13 @@ demographics_edit_module <- function(input, output, session, modal_title, car_to
     selected.DM <- NULL
 
     choices.AMI_Type <- c("NSTEMI", "STEMI")
-    selected.AMI_Type <- NULL
+    #selected.AMI_Type <- NULL
+    selected.AMI_Type <- hold$AMI_Type
     if (tbl == "rct") {
       choiceNames.DM <- ifelse(hold$DM == "0", "Yes", "No")
       choiceValues.DM <- hold$DM
       # choices.AMI_Type <- hold$AMI_Type
-      selected.AMI_Type <- hold$AMI_Type
+      #selected.AMI_Type <- hold$AMI_Type
     }
 
     # CHECK !!! as.numeric으로 풀어야 됨.
@@ -251,6 +252,16 @@ demographics_edit_module <- function(input, output, session, modal_title, car_to
             ),
             column(
               width = 3,
+              radioButtons(
+                inputId = ns("AMI_Type"),
+                label = "AMI Type",
+                choices = choices.AMI_Type,
+                selected = selected.AMI_Type,
+                inline = T
+              )
+            ),
+            column(
+              width = 3,
               textInput(
                 inputId = ns("Initial"),
                 label = "Initial",
@@ -403,6 +414,7 @@ demographics_edit_module <- function(input, output, session, modal_title, car_to
       "Initial" = ifelse(is.null(input$Initial), "", input$Initial),
       "Agree_Date" = ifelse(is.null(input$Agree_Date), "", input$Agree_Date),
       "Index_PCI_Date" = ifelse(is.null(input$Index_PCI_Date), "", input$Index_PCI_Date),
+      "AMI_Type" = ifelse(is.null(input$AMI_Type), "", input$AMI_Type),
       "Birthday" = ifelse(is.null(input$Birthday), "", input$Birthday),
       "Age" = ifelse(is.null(input$Age), "", input$Age),
       "Sex" = ifelse(is.null(input$Sex), "", input$Sex),
