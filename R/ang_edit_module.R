@@ -49,7 +49,7 @@ ang_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
             dateInput(
               ns("Date_ang"),
               "Primary 시술일자",
-              value = ifelse(is.null(hold), "", lubridate::as_date(hold$Date_ang)),
+              value = lubridate::as_date(hold$Date_ang),
               language = "ko"
             )
           ),

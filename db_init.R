@@ -1559,3 +1559,15 @@ dbListTables(conn)
 
 # disconnect from SQLite before continuing
 dbDisconnect(conn)
+
+
+
+## Add Troponin I column
+#for (tbl in c("rct", "pros"))
+#  dbExecute(
+#    conn, paste0("ALTER TABLE ", tbl, " ADD COLUMN BTroI_adm TEXT AFTER PTroT_adm;"),
+#  )
+
+#dbExecute(
+#  conn, paste0("ALTER TABLE ", tbl, " ADD COLUMN PTroI_adm TEXT AFTER BTroI_adm;"),
+#)

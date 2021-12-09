@@ -523,7 +523,7 @@ cars_table_module <- function(input, output, session, tbl = "rct", sessionid) {
       `3m-fu` = m3,
       `6m-fu` = m6,
       `scv` = mf,
-      out[,(ncol(out)-4):ncol(out)] # Created at, Created by, Modified at, Modified by
+      out[, c("created_at", "created_by", "modified_at", "modified_by")] # Created at, Created by, Modified at, Modified by
     )
     
     # Data is empty

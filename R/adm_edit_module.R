@@ -821,7 +821,7 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
             dateInput(
               ns("Lab_Date_adm"),
               "Lab Date",
-              value = ifelse(is.null(hold), "", lubridate::as_date(hold$Lab_Date_adm)),
+              value = lubridate::as_date(hold$Lab_Date_adm),
               language = "ko"
             ),
           ),
@@ -1153,22 +1153,27 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
         ),
         fluidRow(
           column(
-            width = 3
-          ),
-          column(
             width = 3,
+          ), 
+          column(
+            width = 2,
             style = "text-align : center",
             h5("CK (IU/L)")
           ),
           column(
-            width = 3,
+            width = 2,
             style = "text-align : center",
             h5("CK-MB (ng/ml)")
           ),
           column(
-            width = 3,
+            width = 2,
             style = "text-align : center",
             h5("TroponinT (ng/ml)")
+          ),
+          column(
+            width = 2,
+            style = "text-align : center",
+            h5("TroponinI (ng/ml)")
           )
         ),
         fluidRow(
@@ -1177,7 +1182,7 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
             h5("시술 전 peak 값", style = "padding-top : 15px")
           ),
           column(
-            width = 3,
+            width = 2,
             numericInput(
               ns("BCK_adm"),
               "",
@@ -1187,7 +1192,7 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
             )
           ),
           column(
-            width = 3,
+            width = 2,
             numericInput(
               ns("BCKMB_adm"),
               "",
@@ -1197,11 +1202,21 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
             )
           ),
           column(
-            width = 3,
+            width = 2,
             numericInput(
               ns("BTroT_adm"),
               "",
               value = ifelse(is.null(hold), "", hold$BTroT_adm),
+              min = 0, max = 120,
+              step = .001
+            )
+          ),
+          column(
+            width = 2,
+            numericInput(
+              ns("BTroI_adm"),
+              "",
+              value = ifelse(is.null(hold), "", hold$BTroI_adm),
               min = 0, max = 120,
               step = .001
             )
@@ -1213,7 +1228,7 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
             h5("시술 후 peak 값", style = "padding-top : 15px")
           ),
           column(
-            width = 3,
+            width = 2,
             numericInput(
               ns("PCK_adm"),
               "",
@@ -1223,7 +1238,7 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
             )
           ),
           column(
-            width = 3,
+            width = 2,
             numericInput(
               ns("PCKMB_adm"),
               "",
@@ -1233,11 +1248,21 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
             )
           ),
           column(
-            width = 3,
+            width = 2,
             numericInput(
               ns("PTroT_adm"),
               "",
               value = ifelse(is.null(hold), "", hold$PTroT_adm),
+              min = 0, max = 120,
+              step = .001
+            )
+          ),
+          column(
+            width = 2,
+            numericInput(
+              ns("PTroI_adm"),
+              "",
+              value = ifelse(is.null(hold), "", hold$PTroI_adm),
               min = 0, max = 120,
               step = .001
             )
@@ -1929,6 +1954,8 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
         "PCK_adm" = ifelse(is.null(input$PCK_adm), "", input$PCK_adm),
         "PCKMB_adm" = ifelse(is.null(input$PCKMB_adm), "", input$PCKMB_adm),
         "PTroT_adm" = ifelse(is.null(input$PTroT_adm), "", input$PTroT_adm),
+        "BTroI_adm" = ifelse(is.null(input$BTroI_adm), "", input$BTroI_adm),
+        "PTroI_adm" = ifelse(is.null(input$PTroI_adm), "", input$PTroI_adm),
         
         "ECG_Rhythm_adm" = ifelse(is.null(input$ECG_Rhythm_adm), "", input$ECG_Rhythm_adm),
         "ECG_Rhythm_others_adm" = ifelse(is.null(input$ECG_Rhythm_others_adm), "", input$ECG_Rhythm_others_adm),
