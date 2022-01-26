@@ -419,6 +419,9 @@ add_initialedit_module <- function(input, output, session, modal_title, car_to_e
         data.stata <- subset(data(), DM == input$DM_random & AMI_Type == input$STEMI_random)
         # idlist <- setdiff(pid.group, data()$pid)
         idlist <- setdiff(paste0("R-", 1:100000), data()$pid)
+        if (input$Center == "전남대병원"){
+          idlist <- setdiff(paste0("CN-", 1:100000), data()$pid)
+        }
         
         if (nrow(data.stata) >= length(pid.group)) {
           ## Random assign
