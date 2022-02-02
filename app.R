@@ -62,6 +62,7 @@ ui <- dashboardPage(
             selected = NULL,
             tabPanel(
               title = "RCT",
+              hospital_select_module_ui("table_rct-hospital_selector"),
               cars_table_module_ui("table_rct")
             ),
             tabPanel(

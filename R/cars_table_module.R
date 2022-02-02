@@ -144,7 +144,6 @@ cars_table_module <- function(input, output, session, tbl = "rct", sessionid) {
 
   observeEvent(cars(), {
     out <- cars() # one observation
-
     ids <- out$pid
 
     # data에 입력 없을시 Error
@@ -530,10 +529,24 @@ cars_table_module <- function(input, output, session, tbl = "rct", sessionid) {
     if (is.null(car_table_prep())) {
       # loading data into the table for the first time, so we render the entire table
       # rather than using a DT proxy
-      car_table_prep(out)
+      if (tbl == "rct") {
+        hospital <- callModule(hospital_select_module, "hospital_selector")
+        observeEvent(hospital(), {
+          car_table_prep(filter(out, Center == hospital()))
+        })
+      }
+      else {
+        car_table_prep(out)
+      }
     } else {
       # table has already rendered, so use DT proxy to update the data in the
       # table without rerendering the entire table
+      if (tbl == "rct") {
+        hospital <- callModule(hospital_select_module, "hospital_selector")
+        observeEvent(hospital(), {
+          replaceData(car_table_proxy, filter(out, Center == hospital()), resetPaging = FALSE, rownames = FALSE)
+        })
+      }
       replaceData(car_table_proxy, out, resetPaging = FALSE, rownames = FALSE)
     }
     
@@ -553,7 +566,6 @@ cars_table_module <- function(input, output, session, tbl = "rct", sessionid) {
   output$car_table <- renderDT({
     req(car_table_prep())
     out <- car_table_prep()
-
     datatable(
       out,
       rownames = FALSE,
