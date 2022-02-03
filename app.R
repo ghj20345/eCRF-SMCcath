@@ -8,6 +8,7 @@ library(shinydashboardPlus)
 #  admin = c(T, F),
 #  stringsAsFactors = FALSE
 # )
+options(shiny.fullstacktrace = TRUE)
 
 # create_db(credentials_data = credentials, sqlite_path = "data/database.sqlite")
 

@@ -343,6 +343,17 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
               choices = c("Yes" = "Yes", "No" = "No"),
               selected = ifelse(is.na(hold$Trimetazidine_adm),character(0), hold$Trimetazidine_adm),
               inline = T
+            ),
+            conditionalPanel(
+              "input.Trimetazidine_adm == 'Yes'",
+              ns = ns,
+              numericInput(
+                ns("Trimetazidine_dose_adm"),
+                label = "Dose",
+                value = hold$Trimetazidine_dose_adm,
+                min = 0,
+                step = 1
+              )
             )
           ),
           column(
@@ -363,6 +374,31 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
               choices = c("Yes" = "Yes", "No" = "No"),
               selected = ifelse(is.na(hold$Nitrate_adm),character(0), hold$Nitrate_adm),
               inline = T
+            ),
+            conditionalPanel(
+              "input.Nitrate_adm == 'Yes'",
+              ns = ns,
+              fluidRow(
+                column(
+                  width = 6,
+                  textInput(
+                    ns("Nitrate_name_adm"),
+                    label = "Name",
+                    value = hold$Nitrate_name_adm
+                  )
+                ),
+                column(
+                  width = 6,
+                  numericInput(
+                    ns("Nitrate_dose_adm"),
+                    label = "Dose",
+                    value = hold$Nitrate_dose_adm,
+                    min = 0,
+                    max = 200,
+                    step = 1
+                  )
+                )
+              )
             )
           )
         ),
@@ -375,6 +411,17 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
               choices = c("Yes" = "Yes", "No" = "No"),
               selected = ifelse(is.na(hold$Prasugrel_adm),character(0), hold$Prasugrel_adm),
               inline = T
+            ),
+            conditionalPanel(
+              "input.Prasugrel_adm == 'Yes'",
+              ns = ns,
+              numericInput(
+                ns("Prasugrel_dose_adm"),
+                label = "Dose",
+                value = hold$Prasugrel_dose_adm,
+                min = 0,
+                step = 1
+              )
             )
           ),
           column(
@@ -385,6 +432,17 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
               choices = c("Yes" = "Yes", "No" = "No"),
               selected = ifelse(is.na(hold$Ticagrelor_adm),character(0), hold$Ticagrelor_adm),
               inline = T
+            ),
+            conditionalPanel(
+              "input.Ticagrelor_adm == 'Yes'",
+              ns = ns,
+              numericInput(
+                ns("Ticagrelor_dose_adm"),
+                label = "Dose",
+                value = hold$Ticagrelor_dose_adm,
+                min = 0,
+                step = 1
+              )
             )
           ),
           column(
@@ -395,6 +453,17 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
               choices = c("Yes" = "Yes", "No" = "No"),
               selected = ifelse(is.na(hold$Wafarin_adm),character(0), hold$Wafarin_adm),
               inline = T
+            ),
+            conditionalPanel(
+              "input.Wafarin_adm == 'Yes'",
+              ns = ns,
+              numericInput(
+                ns("Wafarin_dose_adm"),
+                label = "Dose",
+                value = hold$Wafarin_dose_adm,
+                min = 0,
+                step = 1
+              )
             )
           ),
           column(
@@ -405,6 +474,17 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
               choices = c("Yes" = "Yes", "No" = "No"),
               selected = ifelse(is.na(hold$Nicorandil_adm),character(0), hold$Nicorandil_adm),
               inline = T
+            ),
+            conditionalPanel(
+              "input.Nicorandil_adm == 'Yes'",
+              ns = ns,
+              numericInput(
+                ns("Nicorandil_dose_adm"),
+                label = "Dose",
+                value = hold$Nicorandil_dose_adm,
+                min = 0,
+                step = 1
+              )
             )
           )
         ),
@@ -522,6 +602,17 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
               choices = c("Yes" = "Yes", "No" = "No"),
               selected = ifelse(is.na(hold$Insulin_adm),character(0), hold$Insulin_adm),
               inline = T
+            ),
+            conditionalPanel(
+              "input.Insulin_adm == 'Yes'",
+              ns = ns,
+              numericInput(
+                ns("Insulin_dose_adm"),
+                label = "Dose",
+                value = hold$Insulin_dose_adm,
+                min = 0,
+                step = 1
+              )
             )
           )
         ),
@@ -789,6 +880,42 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
                     value = hold$Alpha_dose_adm,
                     min = 0,
                     max = 200,
+                    step = 1
+                  )
+                )
+              )
+            )
+          )
+        ),
+        fluidRow(
+          column(
+            width = 3,
+            radioButtons(
+              ns("Entresto_adm"),
+              label = "Entresto",
+              choices = c("Yes" = "Yes", "No" = "No"),
+              selected = ifelse(is.na(hold$Entresto_adm),character(0), hold$Entresto_adm),
+              inline = T
+            ),
+            conditionalPanel(
+              "input.Entresto_adm == 'Yes'",
+              ns = ns,
+              fluidRow(
+                column(
+                  width = 6,
+                  textInput(
+                    ns("Entresto_name_adm"),
+                    label = "Name",
+                    value = hold$Entresto_name_adm
+                  )
+                ),
+                column(
+                  width = 6,
+                  numericInput(
+                    ns("Entresto_dose_adm"),
+                    label = "Dose",
+                    value = hold$Entresto_dose_adm,
+                    min = 0,
                     step = 1
                   )
                 )
@@ -1068,24 +1195,6 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
           column(
             width = 3,
             textInput(
-              ns("hs_CRP_adm"),
-              placeholder = 'mg/dl',
-              HTML(
-                paste0(
-                  "hs-CRP",
-                  actionButton(
-                    inputId = ns("hsND"),
-                    label = "ND",
-                    style = "font-size : 2px; padding : 0px 2em 0px 2em; margin-left : 10px; background-color : #f39c12"
-                  )
-                )
-              ),
-              value = ifelse(is.null(hold), "", hold$hs_CRP_adm),
-            )
-          ),
-          column(
-            width = 3,
-            textInput(
               ns("ALT_adm"),
               placeholder = 'IU/L',
               HTML(
@@ -1100,9 +1209,8 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
               ),
               value = ifelse(is.null(hold), "", hold$ALT_adm)
             )
-          )
-        ),
-        fluidRow(
+
+          ),
           column(
             width = 3,
             textInput(
@@ -1118,11 +1226,67 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
                   )
                 )
               ),
-              value = ifelse(is.null(hold), "", hold$NT_Pro_BNP_adm),
+              value = ifelse(is.null(hold), "", hold$NT_Pro_BNP_adm)
+            )
+          )
+        ),
+        fluidRow(
+          column(
+            width = 3,
+            textInput(
+              ns("Na_adm"),
+              placeholder = 'mEq/L',
+              HTML(
+                paste0(
+                  "Na",
+                  actionButton(
+                    inputId = ns("naND"),
+                    label = "ND",
+                    style = "font-size : 2px; padding : 0px 2em 0px 2em; margin-left : 10px; background-color : #f39c12"
+                  )
+                )
+              ),
+              value = ifelse(is.null(hold), "", hold$Na_adm)
             )
           ),
           column(
-            width = 4,
+            width = 3,
+            textInput(
+              ns("K_adm"),
+              placeholder = 'mEq/L',
+              HTML(
+                paste0(
+                  "K",
+                  actionButton(
+                    inputId = ns("kND"),
+                    label = "ND",
+                    style = "font-size : 2px; padding : 0px 2em 0px 2em; margin-left : 10px; background-color : #f39c12"
+                  )
+                )
+              ),
+              value = ifelse(is.null(hold), "", hold$K_adm)
+            )
+          ),
+          column(
+            width = 3,
+            textInput(
+              ns("Cl_adm"),
+              placeholder = 'mEq/L',
+              HTML(
+                paste0(
+                  "Cl",
+                  actionButton(
+                    inputId = ns("clND"),
+                    label = "ND",
+                    style = "font-size : 2px; padding : 0px 2em 0px 2em; margin-left : 10px; background-color : #f39c12"
+                  )
+                )
+              ),
+              value = ifelse(is.null(hold), "", hold$Cl_adm)
+            )
+          ),
+          column(
+            width = 3,
             radioButtons(
               ns("hCG_adm"),
               label = "hCG",
@@ -1316,222 +1480,6 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
           HTML(
             paste0(
               '<h3 style= "background:#3466A1; color:#FFFFFF; padding:0.3em;padding-bottom:0.6em;">',
-              "Non-Invasive Test",
-              tags$div(
-                modalButton("", icon("times")),
-                style = "float:right;"
-              ),
-              actionButton(
-                ns("submit6"),
-                HTML('<i class="fas fa-check"></i>'),
-                class = "btn",
-                style = "float:right; margin-right:10px; background-color : #27ae60;"
-              )
-            ),
-            "</h3>"
-          )
-        ),
-        fluidRow(
-          column(
-            width = 2,
-            radioButtons(
-              ns("MSPECT_adm"),
-              label = "SPECT",
-              choices = c("Yes" = "Yes", "No" = "No"),
-              selected = ifelse(is.null(hold$MSPECT_adm), character(0), hold$MSPECT_adm),
-              inline = TRUE
-            )
-          ),
-          column(
-            width = 8,
-            conditionalPanel(
-              "input.MSPECT_adm == 'Yes'",
-              ns = ns,
-              radioButtons(
-                ns("MSPECT_detail_adm"),
-                "",
-                choices = c("Positive", "Negative"),
-                selected = ifelse(is.null(hold$MSPECT_detail_adm), character(0), hold$MSPECT_detail_adm),
-                inline = T
-              )
-            )
-          ),
-          column(
-            width = 2,
-            conditionalPanel(
-              "input.MSPECT_adm == 'Yes'",
-              ns = ns,
-              dateInput(
-                ns("MSPECT_Date_adm"),
-                "Date",
-                value = lubridate::as_date(hold$MSPECT_Date_adm),
-                language = "ko"
-              )
-            )
-          )
-        ),
-        fluidRow(
-          column(
-            width = 2,
-            radioButtons(
-              ns("TMT_adm"),
-              label = "TMT",
-              choices = c("Yes" = "Yes", "No" = "No"),
-              selected = ifelse(is.null(hold$TMT_adm), character(0), hold$TMT_adm),
-              inline = TRUE
-            )
-          ),
-          column(
-            width = 8,
-            conditionalPanel(
-              "input.TMT_adm == 'Yes'",
-              ns = ns,
-              radioButtons(
-                ns("TMT_detail_adm"),
-                "",
-                choices = c("Positive", "Negative", "Suggestive Positivie", "Incomplete (Inadequate)"),
-                selected = ifelse(is.null(hold$TMT_detail_adm), character(0), hold$TMT_detail_adm),
-                inline = T
-              )
-            )
-          ),
-          column(
-            width = 2,
-            conditionalPanel(
-              "input.TMT_adm == 'Yes'",
-              ns = ns,
-              dateInput(
-                ns("TMT_Date_adm"),
-                "Date",
-                value = lubridate::as_date(hold$TMT_Date_adm),
-                language = "ko"
-              )
-            )
-          )
-        ),
-        fluidRow(
-          column(
-            width = 2,
-            radioButtons(
-              ns("EEcho_adm"),
-              label = "Stress Echo",
-              choices = c("Yes" = "Yes", "No" = "No"),
-              selected = ifelse(is.null(hold$EEcho_adm), character(0), hold$EEcho_adm),
-              inline = TRUE
-            )
-          ),
-          column(
-            width = 8,
-            conditionalPanel(
-              "input.EEcho_adm == 'Yes'",
-              ns = ns,
-              radioButtons(
-                ns("EEcho_detail_adm"),
-                "",
-                choices = c("Positive", "Negative", "Equivocal", "Incomplete"),
-                selected = ifelse(is.null(hold$EEcho_detail_adm), character(0), hold$EEcho_detail_adm),
-                inline = T
-              )
-            )
-          ),
-          column(
-            width = 2,
-            conditionalPanel(
-              "input.EEcho_adm == 'Yes'",
-              ns = ns,
-              dateInput(
-                ns("EEcho_Date_adm"),
-                "Date",
-                value = lubridate::as_date(hold$EEcho_Date_adm),
-                language = "ko"
-              )
-            )
-          )
-        ),
-        fluidRow(
-          column(
-            width = 2,
-            radioButtons(
-              ns("APET_adm"),
-              label = "PET",
-              choices = c("Yes" = "Yes", "No" = "No"),
-              selected = ifelse(is.null(hold$APET_adm), character(0), hold$APET_adm),
-              inline = TRUE
-            )
-          ),
-          column(
-            width = 8,
-            conditionalPanel(
-              "input.APET_adm == 'Yes'",
-              ns = ns,
-              radioButtons(
-                ns("APET_detail_adm"),
-                "",
-                choices = c("Positive", "Negative", "Equivocal"),
-                selected = ifelse(is.null(hold$APET_detail_adm), character(0), hold$APET_detail_adm),
-                inline = T
-              )
-            )
-          ),
-          column(
-            width = 2,
-            conditionalPanel(
-              "input.APET_adm == 'Yes'",
-              ns = ns,
-              dateInput(
-                ns("APET_Date_adm"),
-                "Date",
-                value = lubridate::as_date(hold$APET_Date_adm),
-                language = "ko"
-              )
-            )
-          )
-        ),
-
-        ## CMR
-        fluidRow(
-          column(
-            width = 2,
-            radioButtons(
-              ns("CMR_adm"),
-              label = "CMR",
-              choices = c("Yes" = "Yes", "No" = "No"),
-              selected = ifelse(is.null(hold$CMR_adm), character(0), hold$CMR_adm),
-              inline = TRUE
-            )
-          ),
-          column(
-            width = 8,
-            conditionalPanel(
-              "input.CMR_adm == 'Yes'",
-              ns = ns,
-              radioButtons(
-                ns("CMR_detail_adm"),
-                "",
-                choices = c("Positive", "Negative"),
-                selected = ifelse(is.null(hold$CMR_detail_adm), character(0), hold$CMR_detail_adm),
-                inline = T
-              )
-            )
-          ),
-          column(
-            width = 2,
-            conditionalPanel(
-              "input.CMR_adm == 'Yes'",
-              ns = ns,
-              dateInput(
-                ns("CMR_Date_adm"),
-                "Date",
-                value = lubridate::as_date(hold$CMR_Date_adm),
-                language = "ko"
-              )
-            )
-          )
-        ),
-        tags$div(
-          HTML(
-            paste0(
-              '<h3 style= "background:#3466A1; color:#FFFFFF; padding:0.3em;padding-bottom:0.6em;">',
               "Echocardiography (Post-PCI)",
               tags$div(
                 modalButton("", icon("times")),
@@ -1697,11 +1645,25 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
             )
           )
         ),
-        dateInput(
-          ns("CMR_Date_POST_adm"),
-          "CMR Date (POST-PCI)",
-          value = lubridate::as_date(hold$CMR_Date_POST_adm),
-          language = "ko"
+        fluidRow(
+          column(
+            width = 6,
+            dateInput(
+              ns("CMR_Date_POST_adm"),
+              "CMR Date (POST-PCI)",
+              value = lubridate::as_date(hold$CMR_Date_POST_adm),
+              language = "ko"
+            )
+          ),
+          column(
+            width = 3,
+            textInput(
+              ns("LVEDP_POST_PCI"),
+              "Left ventricular end-diastolic pressure(LVEDP) (POST-PCI)",
+              placeholder = "mmHg",
+              value = ifelse(is.null(hold), "", hold$LVEDP_POST_PCI)
+            )
+          )
         ),
         title =
           tags$div(
@@ -1826,9 +1788,6 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
     updateTextInput(session, "AST_adm", value = "ND")
   })
 
-  observeEvent(input$hsND, {
-    updateTextInput(session, "hs_CRP_adm", value = "ND")
-  })
 
   observeEvent(input$altND, {
     updateTextInput(session, "ALT_adm", value = "ND")
@@ -1836,6 +1795,18 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
 
   observeEvent(input$ntpND, {
     updateTextInput(session, "NT_Pro_BNP_adm", value = "ND")
+  })
+  
+  observeEvent(input$naND, {
+    updateTextInput(session, "Na_adm", value = "ND")
+  })
+  
+  observeEvent(input$kND, {
+    updateTextInput(session, "K_adm", value = "ND")
+  })
+  
+  observeEvent(input$clND, {
+    updateTextInput(session, "Cl_adm", value = "ND")
   })
   observeEvent(input$CYfA, {
     updateRadioButtons(session, "Aspirin_adm", selected = "Yes")
@@ -1858,6 +1829,7 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
     updateRadioButtons(session, "GLP_adm", selected = "Yes")
     updateRadioButtons(session, "Alpha_adm", selected = "Yes")
     updateRadioButtons(session, "Insulin_adm", selected = "Yes")
+    updateRadioButtons(session, "Entresto_adm", selected = "Yes")
   })
 
   edit_car_dat <- reactive({
@@ -1890,15 +1862,22 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
         
         "Aspirin_adm" = ifelse(is.null(input$Aspirin_adm), "", input$Aspirin_adm),
         "Trimetazidine_adm" = ifelse(is.null(input$Trimetazidine_adm), "", input$Trimetazidine_adm),
+        "Trimetazidine_dose_adm" = ifelse(is.null(input$Trimetazidine_dose_adm), "", input$Trimetazidine_dose_adm),
         "Clopidogrel_adm" = ifelse(is.null(input$Clopidogrel_adm), "", input$Clopidogrel_adm),
         "Nitrate_adm" = ifelse(is.null(input$Nitrate_adm), "", input$Nitrate_adm),
+        "Nitrate_name_adm" = ifelse(is.null(input$Nitrate_name_adm), "", input$Nitrate_name_adm),
+        "Nitrate_dose_adm" = ifelse(is.null(input$Nitrate_dose_adm), "", input$Nitrate_dose_adm),
         "Nicorandil_adm" = ifelse(is.null(input$Nicorandil_adm), "", input$Nicorandil_adm),
+        "Nicorandil_dose_adm" = ifelse(is.null(input$Nicorandil_dose_adm), "", input$Nicorandil_dose_adm),
         "Prasugrel_adm" = ifelse(is.null(input$Prasugrel_adm), "", input$Prasugrel_adm),
+        "Prasugrel_dose_adm" = ifelse(is.null(input$Prasugrel_dose_adm), "", input$Prasugrel_dose_adm),
         "Statin_adm" = ifelse(is.null(input$Statin_adm), "", input$Statin_adm),
         "Statin_name_adm" = ifelse(is.null(input$Statin_name_adm), "", input$Statin_name_adm),
         "Statin_dose_adm" = ifelse(is.null(input$Statin_dose_adm), "", input$Statin_dose_adm),
         "Ticagrelor_adm" = ifelse(is.null(input$Ticagrelor_adm), "", input$Ticagrelor_adm),
+        "Ticagrelor_dose_adm" = ifelse(is.null(input$Ticagrelor_dose_adm), "", input$Ticagrelor_dose_adm),
         'Wafarin_adm' = ifelse(is.null(input$Wafarin_adm), '', input$Wafarin_adm),
+        "Wafarin_dose_adm" = ifelse(is.null(input$Wafarin_dose_adm), "", input$Wafarin_dose_adm),
         'NOAC_adm' = ifelse(is.null(input$NOAC_adm), '', input$NOAC_adm),
         'NOAC_name_adm' = ifelse(is.null(input$NOAC_name_adm), '', input$NOAC_name_adm),
         'NOAC_dose_adm' = ifelse(is.null(input$NOAC_dose_adm), '', input$NOAC_dose_adm),
@@ -1929,6 +1908,10 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
         'Alpha_name_adm' = ifelse(is.null(input$Alpha_name_adm), '', input$Alpha_name_adm),
         'Alpha_dose_adm' = ifelse(is.null(input$Alpha_dose_adm), '', input$Alpha_dose_adm),
         'Insulin_adm' = ifelse(is.null(input$Insulin_adm), '', input$Insulin_adm),
+        "Insulin_dose_adm" = ifelse(is.null(input$Insulin_dose_adm), "", input$Insulin_dose_adm),
+        "Entresto_adm" = ifelse(is.null(input$Entresto_adm), "", input$Entresto_adm),
+        "Entresto_name_adm" = ifelse(is.null(input$Entresto_name_adm), "", input$Entresto_name_adm),
+        "Entresto_dose_adm" = ifelse(is.null(input$Entresto_dose_adm), "", input$Entresto_dose_adm),
         
         "Lab_Date_adm" = ifelse(is.null(input$Lab_Date_adm), "", lubridate::as_date(input$Lab_Date_adm)),
         "WBC_adm" = ifelse(is.null(input$WBC_adm), "", input$WBC_adm),
@@ -1944,9 +1927,11 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
         "MDRD_adm" = ifelse(is.null(input$MDRD_adm), "", input$MDRD_adm),
         "HbA1C_adm" = ifelse(is.null(input$HbA1C_adm), "", input$HbA1C_adm),
         "AST_adm" = ifelse(is.null(input$AST_adm), "", input$AST_adm),
-        "hs_CRP_adm" = ifelse(is.null(input$hs_CRP_adm), "", input$hs_CRP_adm),
         "ALT_adm" = ifelse(is.null(input$ALT_adm), "", input$ALT_adm),
         "NT_Pro_BNP_adm" = ifelse(is.null(input$NT_Pro_BNP_adm), "", input$NT_Pro_BNP_adm),
+        "Na_adm" = ifelse(is.null(input$Na_adm), "", input$Na_adm),
+        "K_adm" = ifelse(is.null(input$K_adm), "", input$K_adm),
+        "Cl_adm" = ifelse(is.null(input$Cl_adm), "", input$Cl_adm),
         'hCG_adm' = ifelse(is.null(input$hCG_adm), '', input$hCG_adm),
         "BCK_adm" = ifelse(is.null(input$BCK_adm), "", input$BCK_adm),
         "BCKMB_adm" = ifelse(is.null(input$BCKMB_adm), "", input$BCKMB_adm),
@@ -1959,22 +1944,6 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
         
         "ECG_Rhythm_adm" = ifelse(is.null(input$ECG_Rhythm_adm), "", input$ECG_Rhythm_adm),
         "ECG_Rhythm_others_adm" = ifelse(is.null(input$ECG_Rhythm_others_adm), "", input$ECG_Rhythm_others_adm),
-        
-        "MSPECT_adm" = ifelse(is.null(input$MSPECT_adm), '', input$MSPECT_adm),
-        "MSPECT_detail_adm" = ifelse(is.null(input$MSPECT_detail_adm), '', input$MSPECT_detail_adm),
-        "MSPECT_Date_adm" = ifelse(is.null(input$MSPECT_Date_adm), Sys.Date(), input$MSPECT_Date_adm),
-        "TMT_adm" = ifelse(is.null(input$TMT_adm), '', input$TMT_adm),
-        "TMT_Date_adm" = ifelse(is.null(input$TMT_Date_adm), Sys.Date(), input$TMT_Date_adm),
-        "TMT_detail_adm" = ifelse(is.null(input$TMT_detail_adm), '', input$TMT_detail_adm),
-        "EEcho_adm" = ifelse(is.null(input$EEcho_adm), "", input$EEcho_adm),
-        "EEcho_detail_adm" = ifelse(is.null(input$EEcho_detail_adm), "", input$EEcho_detail_adm),
-        "EEcho_Date_adm" = ifelse(is.null(input$EEcho_Date_adm), Sys.Date(), input$EEcho_Date_adm),
-        "APET_adm" = ifelse(is.null(input$APET_adm), "", input$APET_adm),
-        "APET_detail_adm" = ifelse(is.null(input$APET_detail_adm), "", input$APET_detail_adm),
-        "APET_Date_adm" = ifelse(is.null(input$APET_Date_adm), Sys.Date(), input$APET_Date_adm),
-        "CMR_adm" = ifelse(is.null(input$CMR_adm), "", input$CMR_adm),
-        "CMR_detail_adm" = ifelse(is.null(input$CMR_detail_adm), "", input$CMR_detail_adm),
-        "CMR_Date_adm" = ifelse(is.null(input$CMR_Date_adm), Sys.Date(), input$CMR_Date_adm),
         
         "Echo_Date_adm" = ifelse(is.null(input$Echo_Date_adm), Sys.Date(), input$Echo_Date_adm),
         'LVIDs_adm' = ifelse(is.null(input$LVIDs_adm), '', input$LVIDs_adm),
@@ -1992,8 +1961,9 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
         'RAP_adm' = ifelse(is.null(input$RAP_adm), '', input$RAP_adm),
         'LVEF_adm' = ifelse(is.null(input$LVEF_adm), '', input$LVEF_adm),
         'Strain_adm' = ifelse(is.null(input$Strain_adm), '', input$Strain_adm),
-        'CMR_Date_POST_adm' = ifelse(is.null(input$CMR_Date_POST_adm), Sys.Date(), as.character(input$CMR_Date_POST_adm))
-        
+        'CMR_Date_POST_adm' = ifelse(is.null(input$CMR_Date_POST_adm), Sys.Date(), as.character(input$CMR_Date_POST_adm)),
+        'LVEDP_POST_PCI' = ifelse(is.null(input$LVEDP_POST_PCI), '', input$LVEDP_POST_PCI)
+
 
       )
     )
@@ -2024,7 +1994,6 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
       input$submit3,
       input$submit4,
       input$submit5,
-      input$submit6,
       input$submit7,
       input$submit8,
       input$submit9
@@ -2038,7 +2007,7 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
     valueExpr = {
       if (input$submit == 0 && input$submit1 == 0 && input$submit2 == 0 &&
         input$submit3 == 0 && input$submit4 == 0 && input$submit5 == 0 &&
-        input$submit6 == 0 && input$submit7 == 0 && input$submit8 == 0 && 
+        input$submit7 == 0 && input$submit8 == 0 && 
         input$submit9 ==0) {
         return()
       }
