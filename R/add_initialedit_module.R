@@ -201,7 +201,7 @@ add_initialedit_module <- function(input, output, session, modal_title, car_to_e
               width = 6,
               radioButtons(
                 ns("ex_5"),
-                "5. SGLT-2 억제제를 지속 복용중인 환자",
+                "5. 과거에 심부전이 있었던 경우",
                 choices = c("Yes", "No"),
                 selected = character(0),
                 inline = T
@@ -213,8 +213,7 @@ add_initialedit_module <- function(input, output, session, modal_title, car_to_e
               width = 6,
               radioButtons(
                 ns("ex_6"),
-                # "6.	비 심장질환으로 기대 여명이 1년 미만이거나 치료에 순응도가 낮을 것으로 기대되는 자(조사자가 의학적인 판단으로 정함)",
-                "6.	사구체 여과율 30 ml/min/1.73m2 미만이거나 투석중인 환자",
+                "6. SGLT-2 억제제를 지속 복용중인 환자",
                 choices = c("Yes", "No"),
                 selected = character(0),
                 inline = T
@@ -224,8 +223,8 @@ add_initialedit_module <- function(input, output, session, modal_title, car_to_e
               width = 6,
               radioButtons(
                 ns("ex_7"),
-                # "7. 연구 참여를 거부한 환자",
-                "7. 1형 당뇨병을 앓고 있는 경우",
+                # "6.	비 심장질환으로 기대 여명이 1년 미만이거나 치료에 순응도가 낮을 것으로 기대되는 자(조사자가 의학적인 판단으로 정함)",
+                "7.	사구체 여과율 30 ml/min/1.73m2 미만이거나 투석중인 환자",
                 choices = c("Yes", "No"),
                 selected = character(0),
                 inline = T
@@ -238,7 +237,7 @@ add_initialedit_module <- function(input, output, session, modal_title, car_to_e
               radioButtons(
                 ns("ex_8"),
                 # "7. 연구 참여를 거부한 환자",
-                "8. SGLT-2 억제제에 과민성이 있는 환자",
+                "8. 1형 당뇨병을 앓고 있는 경우",
                 choices = c("Yes", "No"),
                 selected = character(0),
                 inline = T
@@ -249,20 +248,36 @@ add_initialedit_module <- function(input, output, session, modal_title, car_to_e
               radioButtons(
                 ns("ex_9"),
                 # "7. 연구 참여를 거부한 환자",
-                "9. 임산부 및 수유부",
+                "9. SGLT-2 억제제에 과민성이 있는 환자",
                 choices = c("Yes", "No"),
                 selected = character(0),
                 inline = T
               )
             )
           ),
-          radioButtons(
-            ns("ex_10"),
-            # "7. 연구 참여를 거부한 환자",
-            "10. 비 심장질환으로 인하여 기대여명이 1년 이내이거나 치료에 순응도가 낮을 것으로 기대되는 자 (조사자가 의학적인 판단으로 정함)",
-            choices = c("Yes", "No"),
-            selected = character(0),
-            inline = T
+          fluidRow(
+            column(
+              width = 6,
+              radioButtons(
+                ns("ex_10"),
+                # "7. 연구 참여를 거부한 환자",
+                "10. 임산부 및 수유부",
+                choices = c("Yes", "No"),
+                selected = character(0),
+                inline = T
+              )
+            ),
+            column(
+              width = 6,
+              radioButtons(
+                ns("ex_11"),
+                # "7. 연구 참여를 거부한 환자",
+                "11. 비 심장질환으로 인하여 기대여명이 1년 이내이거나 치료에 순응도가 낮을 것으로 기대되는 자 (조사자가 의학적인 판단으로 정함)",
+                choices = c("Yes", "No"),
+                selected = character(0),
+                inline = T
+              )
+            )
           ),
           title = modal_title,
           size = "l",
@@ -383,7 +398,7 @@ add_initialedit_module <- function(input, output, session, modal_title, car_to_e
       if (tbl == "rct"){
         if (!is.null(input$pid) && (length(input$DM_random) != 0) && (length(input$STEMI_random) != 0) && (length(input$Birthday) != 0) && (length(input$Index_PCI_Date)) != 0 && (length(input$Agree_Date) != 0) && 
             (input$Initial != "") && (length(input$Sex) != 0) && (length(input$in_1) != 0) && (length(input$in_2) != 0) && (length(input$in_3) != 0) && (length(input$in_4) != 0) &&
-            (length(input$ex_1) != 0) && (length(input$ex_2) != 0) && (length(input$ex_3) != 0) && (length(input$ex_4) != 0) && (length(input$ex_5) != 0) && (length(input$ex_6) != 0) && (length(input$ex_7) != 0) && (length(input$ex_8) != 0) && (length(input$ex_9) != 0) && (length(input$ex_10) != 0)) {
+            (length(input$ex_1) != 0) && (length(input$ex_2) != 0) && (length(input$ex_3) != 0) && (length(input$ex_4) != 0) && (length(input$ex_5) != 0) && (length(input$ex_6) != 0) && (length(input$ex_7) != 0) && (length(input$ex_8) != 0) && (length(input$ex_9) != 0) && (length(input$ex_10) != 0) && (length(input$ex_11) != 0)) {
           shinyjs::enable("submit")
         } else{
           shinyjs::disable("submit")
@@ -482,6 +497,7 @@ add_initialedit_module <- function(input, output, session, modal_title, car_to_e
       updateRadioButtons(session, "ex_8", selected = "No")
       updateRadioButtons(session, "ex_9", selected = "No")
       updateRadioButtons(session, "ex_10", selected = "No")
+      updateRadioButtons(session, "ex_11", selected = "No")
     })
     
     edit_car_dat <- reactive({
