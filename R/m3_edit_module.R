@@ -176,7 +176,7 @@ m3_edit_module <- function(input, output, session, modal_title, car_to_edit, mod
             HTML(
               paste0(
                 '<h3 style= "background:#3466A1; color:#FFFFFF; padding:0.3em;padding-bottom:0.6em;">',
-                "Title A",
+                "Cardiac Status",
                 tags$div(
                   modalButton("", icon("times")),
                   style = "float:right;"
@@ -200,95 +200,6 @@ m3_edit_module <- function(input, output, session, modal_title, car_to_edit, mod
                 choices = c("Unknown", "Asymptomatic", "Angina", "Other"),
                 selected = ifelse(is.null(hold$Cardiac_Status_M3),character(0), hold$Cardiac_Status_M3),
                 inline = TRUE
-              )
-            ),
-            column(
-              width = 6,
-              conditionalPanel(
-                "input.Cardiac_Status_M3 == 'Angina'", # if Angina, show CCS I, II, III, IV
-                ns = ns,
-                radioButtons(
-                  ns("CCS_M3"),
-                  "CCS",
-                  choices = c("I", "II", "III", "IV"),
-                  selected = ifelse(is.null(hold$CCS_M3),character(0), hold$CCS_M3),
-                  inline = T
-                )
-              ),
-              conditionalPanel(
-                "input.Cardiac_Status_M3 == 'Other'", # if Other, show textInput
-                ns = ns,
-                textAreaInput(
-                  ns("Other_Cardiac_Status_M3"),
-                  "Other",
-                  value = ifelse(is.null(hold$Other_Cardiac_Status_M3), '', hold$Other_Cardiac_Status_M3),
-                  height = "3em"
-                )
-              )
-            )
-          ),
-          fluidRow(
-            column(
-              width = 6,
-              radioButtons(
-                ns("ECG_Rhythm_M3"),
-                "ECG Rhythm",
-                choices = c("Sinus Rhytum", "Atrial Fibrillation", "Others", "Not Done"),
-                selected = ifelse(is.null(hold$ECG_Rhythm_M3), character(0), hold$ECG_Rhythm_M3),
-                inline = T
-              )
-            ),
-            column(
-              width = 6,
-              conditionalPanel(
-                "input.ECG_Rhythm_M3 == 'Others'",
-                ns = ns,
-                textAreaInput(
-                  ns("ECG_Rhythm_Other_M3"),
-                  "Others",
-                  value = ifelse(is.null(hold$ECG_Rhythm_Other_M3), "", hold$ECG_Rhythm_Other_M3),
-                  width = "400px",
-                  height = "3em"
-                )
-              )
-            )
-          ),
-          # Stress ECG
-          fluidRow(
-            column(
-              width = 3,
-              radioButtons(
-                ns("Stress_ECG_M3"),
-                "Stress ECG (TMT)",
-                choices = c("Yes", "No"),
-                selected = ifelse(is.null(hold$Stress_ECG_M3), character(0), hold$Stress_ECG_M3),
-                inline = T
-              )
-            ),
-            column(
-              width = 3,
-              conditionalPanel(
-                "input.Stress_ECG_M3 == 'Yes'",
-                ns = ns,
-                dateInput(
-                  ns("Stress_ECG_Date_M3"),
-                  "Date",
-                  value = lubridate::as_date(hold$Stress_ECG_Date_M3),
-                  language = "ko"
-                )
-              )
-            ),
-            column(
-              width = 4,
-              conditionalPanel(
-                "input.Stress_ECG_M3 == 'Yes'",
-                ns = ns,
-                radioButtons(
-                  ns("Stress_ECG_Detail_M3"),
-                  "Detail",
-                  choices = c("Positive", "Negative", "Equivocal", "Incomplete (Inadequate)"),
-                  selected = ifelse(is.null(hold$Stress_ECG_Detail_M3), character(0), hold$Stress_ECG_Detail_M3),
-                )
               )
             )
           ),
@@ -564,24 +475,6 @@ m3_edit_module <- function(input, output, session, modal_title, car_to_edit, mod
             column(
               width = 3,
               textInput(
-                ns("hs_CRP_M3"),
-                placeholder = "mg/dl",
-                HTML(
-                  paste0(
-                    "hs-CRP",
-                    actionButton(
-                      inputId = ns("hsND"),
-                      label = "ND",
-                      style = "font-size : 2px; padding : 0px 2em 0px 2em; margin-left : 10px; background-color : #f39c12"
-                    )
-                  )
-                ),
-                value = ifelse(is.null(hold$hs_CRP_M3), "", hold$hs_CRP_M3),
-              )
-            ),
-            column(
-              width = 3,
-              textInput(
                 ns("ALT_M3"),
                 placeholder = "IU/L",
                 HTML(
@@ -596,9 +489,7 @@ m3_edit_module <- function(input, output, session, modal_title, car_to_edit, mod
                 ),
                 value = ifelse(is.null(hold$ALT_M3), "", hold$ALT_M3)
               )
-            )
-          ),
-          fluidRow(
+            ),
             column(
               width = 3,
               textInput(
@@ -615,6 +506,62 @@ m3_edit_module <- function(input, output, session, modal_title, car_to_edit, mod
                   )
                 ),
                 value = ifelse(is.null(hold$NT_Pro_BNP_M3), "", hold$NT_Pro_BNP_M3),
+              )
+            )
+          ),
+          fluidRow(
+            column(
+              width = 3,
+              textInput(
+                ns("Na_M3"),
+                placeholder = 'mEq/L',
+                HTML(
+                  paste0(
+                    "Na",
+                    actionButton(
+                      inputId = ns("naND"),
+                      label = "ND",
+                      style = "font-size : 2px; padding : 0px 2em 0px 2em; margin-left : 10px; background-color : #f39c12"
+                    )
+                  )
+                ),
+                value = ifelse(is.null(hold), "", hold$Na_M3)
+              )
+            ),
+            column(
+              width = 3,
+              textInput(
+                ns("K_M3"),
+                placeholder = 'mEq/L',
+                HTML(
+                  paste0(
+                    "K",
+                    actionButton(
+                      inputId = ns("kND"),
+                      label = "ND",
+                      style = "font-size : 2px; padding : 0px 2em 0px 2em; margin-left : 10px; background-color : #f39c12"
+                    )
+                  )
+                ),
+                value = ifelse(is.null(hold), "", hold$K_M3)
+              )
+            ),
+            column(
+              width = 3,
+              textInput(
+                ns("Cl_M3"),
+                placeholder = 'mEq/L',
+                HTML(
+                  paste0(
+                    "Cl",
+                    actionButton(
+                      inputId = ns("clND"),
+                      label = "ND",
+                      style = "font-size : 2px; padding : 0px 2em 0px 2em; margin-left : 10px; background-color : #f39c12"
+                    )
+                  )
+                ),
+                value = ifelse(is.null(hold), "", hold$Cl_M3)
               )
             )
           ),
@@ -662,6 +609,17 @@ m3_edit_module <- function(input, output, session, modal_title, car_to_edit, mod
                 choices = c("Yes", "No", "Unknown"),
                 selected = ifelse(is.null(hold$Trimetazidine_M3), character(0),hold$Trimetazidine_M3),
                 inline = T
+              ),
+              conditionalPanel(
+                "input.Trimetazidine_M3 == 'Yes'",
+                ns = ns,
+                numericInput(
+                  ns("Trimetazidine_dose_M3"),
+                  label = "Dose",
+                  value = hold$Trimetazidine_dose_M3,
+                  min = 0,
+                  step = 1
+                )
               )
             ),
             column(
@@ -682,6 +640,30 @@ m3_edit_module <- function(input, output, session, modal_title, car_to_edit, mod
                 choices = c("Yes", "No", "Unknown"),
                 selected = ifelse(is.null(hold$Nitrate_M3), character(0),hold$Nitrate_M3),
                 inline = T
+              ),
+              conditionalPanel(
+                "input.Nitrate_M3 == 'Yes'",
+                ns = ns,
+                fluidRow(
+                  column(
+                    width = 6,
+                    textInput(
+                      ns("Nitrate_name_M3"),
+                      label = "Name",
+                      value = hold$Nitrate_name_M3
+                    )
+                  ),
+                  column(
+                    width = 6,
+                    numericInput(
+                      ns("Nitrate_dose_M3"),
+                      label = "Dose",
+                      value = hold$Nitrate_dose_M3,
+                      min = 0,
+                      step = 1
+                    )
+                  )
+                )
               )
             )
           ),
@@ -694,6 +676,17 @@ m3_edit_module <- function(input, output, session, modal_title, car_to_edit, mod
                 choices = c("Yes", "No", "Unknown"),
                 selected = ifelse(is.null(hold$Prasugrel_M3), character(0),hold$Prasugrel_M3),
                 inline = T
+              ),
+              conditionalPanel(
+                "input.Prasugrel_M3 == 'Yes'",
+                ns = ns,
+                numericInput(
+                  ns("Prasugrel_dose_M3"),
+                  label = "Dose",
+                  value = hold$Prasugrel_dose_M3,
+                  min = 0,
+                  step = 1
+                )
               )
             ),
             column(
@@ -704,6 +697,17 @@ m3_edit_module <- function(input, output, session, modal_title, car_to_edit, mod
                 choices = c("Yes", "No", "Unknown"),
                 selected = ifelse(is.null(hold$Ticagrelor_M3),character(0), hold$Ticagrelor_M3),
                 inline = T
+              ),
+              conditionalPanel(
+                "input.Ticagrelor_M3 == 'Yes'",
+                ns = ns,
+                numericInput(
+                  ns("Ticagrelor_dose_M3"),
+                  label = "Dose",
+                  value = hold$Ticagrelor_dose_M3,
+                  min = 0,
+                  step = 1
+                )
               )
             ),
             column(
@@ -714,6 +718,17 @@ m3_edit_module <- function(input, output, session, modal_title, car_to_edit, mod
                 choices = c("Yes", "No", "Unknown"),
                 selected = ifelse(is.null(hold$Wafarin_M3),character(0), hold$Wafarin_M3),
                 inline = T
+              ),
+              conditionalPanel(
+                "input.Wafarin_M3 == 'Yes'",
+                ns = ns,
+                numericInput(
+                  ns("Wafarin_dose_M3"),
+                  label = "Dose",
+                  value = hold$Wafarin_dose_M3,
+                  min = 0,
+                  step = 1
+                )
               )
             ),
             column(
@@ -724,6 +739,17 @@ m3_edit_module <- function(input, output, session, modal_title, car_to_edit, mod
                 choices = c("Yes", "No", "Unknown"),
                 selected = ifelse(is.null(hold$Nicorandil_M3),character(0), hold$Nicorandil_M3),
                 inline = T
+              ),
+              conditionalPanel(
+                "input.Nicorandil_M3 == 'Yes'",
+                ns = ns,
+                numericInput(
+                  ns("Nicorandil_dose_M3"),
+                  label = "Dose",
+                  value = hold$Nicorandil_dose_M3,
+                  min = 0,
+                  step = 1
+                )
               )
             )
           ),
@@ -841,6 +867,17 @@ m3_edit_module <- function(input, output, session, modal_title, car_to_edit, mod
                 choices = c("Yes", "No", "Unknown"),
                 selected = ifelse(is.null(hold$Insulin_M3),character(0), hold$Insulin_M3),
                 inline = T
+              ),
+              conditionalPanel(
+                "input.Insulin_M3 == 'Yes'",
+                ns = ns,
+                numericInput(
+                  ns("Insulin_dose_M3"),
+                  label = "Dose",
+                  value = hold$Insulin_dose_M3,
+                  min = 0,
+                  step = 1
+                )
               )
             )
           ),
@@ -1114,6 +1151,42 @@ m3_edit_module <- function(input, output, session, modal_title, car_to_edit, mod
                 )
               )
             ),
+          ),
+          fluidRow(
+            column(
+              width = 3,
+              radioButtons(
+                ns("Entresto_M3"),
+                label = "Entresto",
+                choices = c("Yes" = "Yes", "No" = "No"),
+                selected = ifelse(is.na(hold$Entresto_M3),character(0), hold$Entresto_M3),
+                inline = T
+              ),
+              conditionalPanel(
+                "input.Entresto_M3 == 'Yes'",
+                ns = ns,
+                fluidRow(
+                  column(
+                    width = 6,
+                    textInput(
+                      ns("Entresto_name_M3"),
+                      label = "Name",
+                      value = hold$Entresto_name_M3
+                    )
+                  ),
+                  column(
+                    width = 6,
+                    numericInput(
+                      ns("Entresto_dose_M3"),
+                      label = "Dose",
+                      value = hold$Entresto_dose_M3,
+                      min = 0,
+                      step = 1
+                    )
+                  )
+                )
+              )
+            )
           ),
           tags$div(
             HTML(
@@ -1849,9 +1922,6 @@ m3_edit_module <- function(input, output, session, modal_title, car_to_edit, mod
     updateTextInput(session, "AST_M3", value = "ND")
   })
   
-  observeEvent(input$hsND, {
-    updateTextInput(session, "hs_CRP_M3", value = "ND")
-  })
   
   observeEvent(input$altND, {
     updateTextInput(session, "ALT_M3", value = "ND")
@@ -1859,6 +1929,18 @@ m3_edit_module <- function(input, output, session, modal_title, car_to_edit, mod
   
   observeEvent(input$ntpND, {
     updateTextInput(session, "NT_Pro_BNP_M3", value = "ND")
+  })
+  
+  observeEvent(input$naND, {
+    updateTextInput(session, "Na_M3", value = "ND")
+  })
+  
+  observeEvent(input$kND, {
+    updateTextInput(session, "K_M3", value = "ND")
+  })
+  
+  observeEvent(input$clND, {
+    updateTextInput(session, "Cl_M3", value = "ND")
   })
   
   observeEvent(input$CYfA, {
@@ -1882,6 +1964,7 @@ m3_edit_module <- function(input, output, session, modal_title, car_to_edit, mod
     updateRadioButtons(session, "GLP_M3", selected = "Yes")
     updateRadioButtons(session, "Alpha_M3", selected = "Yes")
     updateRadioButtons(session, "Insulin_M3", selected = "Yes")
+    updateRadioButtons(session, "Entresto_M3", selected = "Yes")
   })
   
   
@@ -1901,17 +1984,17 @@ m3_edit_module <- function(input, output, session, modal_title, car_to_edit, mod
         "HRT_M3" = ifelse(is.null(input$HRT_M3), "", input$HRT_M3),
         "Event_M3" = ifelse(is.null(input$Event_M3), "", input$Event_M3),
         "Cardiac_Status_M3" = ifelse(is.null(input$Cardiac_Status_M3), "", input$Cardiac_Status_M3),
-        "CCS_M3" = ifelse(is.null(input$CCS_M3), "", input$CCS_M3),
-        "Other_Cardiac_Status_M3" = ifelse(is.null(input$Other_Cardiac_Status_M3), "", input$Other_Cardiac_Status_M3),
+        #"CCS_M3" = ifelse(is.null(input$CCS_M3), "", input$CCS_M3),
+        #"Other_Cardiac_Status_M3" = ifelse(is.null(input$Other_Cardiac_Status_M3), "", input$Other_Cardiac_Status_M3),
         # "Readmission_M3" = ifelse(is.null(input$Readmission_M3), "", input$Readmission_M3),
         # "Readmission_Date_M3" = ifelse(is.null(input$Readmission_Date_M3), "", input$Readmission_Date_M3),
         # "Readmission_reason_M3" = ifelse(is.null(input$Readmission_reason_M3), "", input$Readmission_reason_M3),
         # "Readmission_reason_text_M3" = ifelse(is.null(input$Readmission_reason_text_M3), "", input$Readmission_reason_text_M3),
-        "ECG_Rhythm_M3" = ifelse(is.null(input$ECG_Rhythm_M3), "", input$ECG_Rhythm_M3),
-        "ECG_Rhythm_Other_M3" = ifelse(is.null(input$ECG_Rhythm_Other_M3), "", input$ECG_Rhythm_Other_M3),
-        "Stress_ECG_M3" = ifelse(is.null(input$Stress_ECG_M3), "", input$Stress_ECG_M3),
-        "Stress_ECG_Date_M3" = ifelse(is.null(input$Stress_ECG_Date_M3), "", as.character(input$Stress_ECG_Date_M3)),
-        "Stress_ECG_Detail_M3" = ifelse(is.null(input$Stress_ECG_Detail_M3), "", input$Stress_ECG_Detail_M3),
+        #"ECG_Rhythm_M3" = ifelse(is.null(input$ECG_Rhythm_M3), "", input$ECG_Rhythm_M3),
+        #"ECG_Rhythm_Other_M3" = ifelse(is.null(input$ECG_Rhythm_Other_M3), "", input$ECG_Rhythm_Other_M3),
+        #"Stress_ECG_M3" = ifelse(is.null(input$Stress_ECG_M3), "", input$Stress_ECG_M3),
+        #"Stress_ECG_Date_M3" = ifelse(is.null(input$Stress_ECG_Date_M3), "", as.character(input$Stress_ECG_Date_M3)),
+        #"Stress_ECG_Detail_M3" = ifelse(is.null(input$Stress_ECG_Detail_M3), "", input$Stress_ECG_Detail_M3),
         "Lab_Date_M3" = ifelse(is.null(input$Lab_Date_M3), "", lubridate::as_date(input$Lab_Date_M3)),
         "WBC_M3" = ifelse(is.null(input$WBC_M3), "", input$WBC_M3),
         "TC_M3" = ifelse(is.null(input$TC_M3), "", input$TC_M3),
@@ -1926,20 +2009,31 @@ m3_edit_module <- function(input, output, session, modal_title, car_to_edit, mod
         "MDRD_M3" = ifelse(is.null(input$MDRD_M3), "", input$MDRD_M3),
         "HbA1C_M3" = ifelse(is.null(input$HbA1C_M3), "", input$HbA1C_M3),
         "AST_M3" = ifelse(is.null(input$AST_M3), "", input$AST_M3),
-        "hs_CRP_M3" = ifelse(is.null(input$hs_CRP_M3), "", input$hs_CRP_M3),
+        #"hs_CRP_M3" = ifelse(is.null(input$hs_CRP_M3), "", input$hs_CRP_M3),
         "ALT_M3" = ifelse(is.null(input$ALT_M3), "", input$ALT_M3),
         "NT_Pro_BNP_M3" = ifelse(is.null(input$NT_Pro_BNP_M3), "", input$NT_Pro_BNP_M3),
+        "Na_M3" = ifelse(is.null(input$Na_M3), "", input$Na_M3),
+        "K_M3" = ifelse(is.null(input$K_M3), "", input$K_M3),
+        "Cl_M3" = ifelse(is.null(input$Cl_M3), "", input$Cl_M3),
+        
         "Aspirin_M3" = ifelse(is.null(input$Aspirin_M3), "", input$Aspirin_M3),
         "Trimetazidine_M3" = ifelse(is.null(input$Trimetazidine_M3), "", input$Trimetazidine_M3),
+        "Trimetazidine_dose_M3" = ifelse(is.null(input$Trimetazidine_dose_M3), "", input$Trimetazidine_dose_M3),
         "Clopidogrel_M3" = ifelse(is.null(input$Clopidogrel_M3), "", input$Clopidogrel_M3),
         "Nitrate_M3" = ifelse(is.null(input$Nitrate_M3), "", input$Nitrate_M3),
+        "Nitrate_name_M3" = ifelse(is.null(input$Nitrate_name_M3), "", input$Nitrate_name_M3),
+        "Nitrate_dose_M3" = ifelse(is.null(input$Nitrate_dose_M3), "", input$Nitrate_dose_M3),
         "Nicorandil_M3" = ifelse(is.null(input$Nicorandil_M3), "", input$Nicorandil_M3),
+        "Nicorandil_dose_M3" = ifelse(is.null(input$Nicorandil_dose_M3), "", input$Nicorandil_dose_M3),
         "Prasugrel_M3" = ifelse(is.null(input$Prasugrel_M3), "", input$Prasugrel_M3),
+        "Prasugrel_dose_M3" = ifelse(is.null(input$Prasugrel_dose_M3), "", input$Prasugrel_dose_M3),
         "Statin_M3" = ifelse(is.null(input$Statin_M3), "", input$Statin_M3),
         "Statin_name_M3" = ifelse(is.null(input$Statin_name_M3), "", input$Statin_name_M3),
         "Statin_dose_M3" = ifelse(is.null(input$Statin_dose_M3), "", input$Statin_dose_M3),
         "Ticagrelor_M3" = ifelse(is.null(input$Ticagrelor_M3), "", input$Ticagrelor_M3),
+        "Ticagrelor_dose_M3" = ifelse(is.null(input$Ticagrelor_dose_M3), "", input$Ticagrelor_dose_M3),
         "Wafarin_M3" = ifelse(is.null(input$Wafarin_M3), "", input$Wafarin_M3),
+        "Wafarin_dose_M3" = ifelse(is.null(input$Wafarin_dose_M3), "", input$Wafarin_dose_M3),
         "NOAC_M3" = ifelse(is.null(input$NOAC_M3), "", input$NOAC_M3),
         "NOAC_name_M3" = ifelse(is.null(input$NOAC_name_M3), "", input$NOAC_name_M3),
         "NOAC_dose_M3" = ifelse(is.null(input$NOAC_dose_M3), "", input$NOAC_dose_M3),
@@ -1970,6 +2064,10 @@ m3_edit_module <- function(input, output, session, modal_title, car_to_edit, mod
         "Alpha_name_M3" = ifelse(is.null(input$Alpha_name_M3), "", input$Alpha_name_M3),
         "Alpha_dose_M3" = ifelse(is.null(input$Alpha_dose_M3), "", input$Alpha_dose_M3),
         "Insulin_M3" = ifelse(is.null(input$Insulin_M3), "", input$Insulin_M3),
+        "Insulin_dose_M3" = ifelse(is.null(input$Insulin_dose_M3), "", input$Insulin_dose_M3),
+        "Entresto_M3" = ifelse(is.null(input$Entresto_M3), "", input$Entresto_M3),
+        "Entresto_name_M3" = ifelse(is.null(input$Entresto_name_M3), "", input$Entresto_name_M3),
+        "Entresto_dose_M3" = ifelse(is.null(input$Entresto_dose_M3), "", input$Entresto_dose_M3),
         
         "Event_Details_M3" = ifelse(is.null(input$Event_Details_M3),"", paste0(input$Event_Details_M3, collapse = ',')),
         

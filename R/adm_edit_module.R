@@ -394,7 +394,6 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
                     label = "Dose",
                     value = hold$Nitrate_dose_adm,
                     min = 0,
-                    max = 200,
                     step = 1
                   )
                 )
@@ -1300,6 +1299,223 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
           HTML(
             paste0(
               '<h3 style= "background:#3466A1; color:#FFFFFF; padding:0.3em;padding-bottom:0.6em;">',
+              "After procedure BUN/Cr/FBS",
+              tags$div(
+                modalButton("", icon("times")),
+                style = "float:right;"
+              ),
+              actionButton(
+                ns("submit6"),
+                HTML('<i class="fas fa-check"></i>'),
+                class = "btn",
+                style = "float:right; margin-right:10px; background-color : #27ae60;"
+              )
+            ),
+            "</h3>"
+          )
+        ),
+        fluidRow(
+          h4("1 Day after"),
+          column(
+            width = 3,
+            dateInput(
+              ns("after1d_Date_adm"),
+              "Date",
+              value = lubridate::as_date(hold$after1d_Date_adm),
+              language = "ko"
+            )
+          ),
+          column(
+            width = 3,
+            textInput(
+              ns("BUN_after1d_adm"),
+              placeholder = 'mg/dl',
+              HTML(
+                paste0(
+                  "BUN",
+                  actionButton(
+                    inputId = ns("bun1dND"),
+                    label = "ND",
+                    style = "font-size : 2px; padding : 0px 2em 0px 2em; margin-left : 10px; background-color : #f39c12"
+                  )
+                )
+              ),
+              value = ifelse(is.null(hold), "", hold$BUN_after1d_adm),
+            )
+          ),
+          column(
+            width = 3,
+            textInput(
+              ns("Cr_after1d_adm"),
+              placeholder = 'mg/dl',
+              HTML(
+                paste0(
+                  "Cr",
+                  actionButton(
+                    inputId = ns("cr1dND"),
+                    label = "ND",
+                    style = "font-size : 2px; padding : 0px 2em 0px 2em; margin-left : 10px; background-color : #f39c12"
+                  )
+                )
+              ),
+              value = ifelse(is.null(hold), "", hold$Cr_after1d_adm),
+            )
+          ),
+          column(
+            width = 3,
+            textInput(
+              ns("FG_after1d_adm"),
+              placeholder = 'mg/dl',
+              HTML(
+                paste0(
+                  "Fasting glucose",
+                  actionButton(
+                    inputId = ns("fg1dND"),
+                    label = "ND",
+                    style = "font-size : 2px; padding : 0px 2em 0px 2em; margin-left : 10px; background-color : #f39c12"
+                  )
+                )
+              ),
+              value = ifelse(is.null(hold), "", hold$FG_after1d_adm),
+            )
+          )
+        ),
+        fluidRow(
+          h4("2 Day after"),
+          column(
+            width = 3,
+            dateInput(
+              ns("after2d_Date_adm"),
+              "Date",
+              value = lubridate::as_date(hold$after2d_Date_adm),
+              language = "ko"
+            )
+          ),
+          column(
+            width = 3,
+            textInput(
+              ns("BUN_after2d_adm"),
+              placeholder = 'mg/dl',
+              HTML(
+                paste0(
+                  "BUN",
+                  actionButton(
+                    inputId = ns("bun2dND"),
+                    label = "ND",
+                    style = "font-size : 2px; padding : 0px 2em 0px 2em; margin-left : 10px; background-color : #f39c12"
+                  )
+                )
+              ),
+              value = ifelse(is.null(hold), "", hold$BUN_after2d_adm),
+            )
+          ),
+          column(
+            width = 3,
+            textInput(
+              ns("Cr_after2d_adm"),
+              placeholder = 'mg/dl',
+              HTML(
+                paste0(
+                  "Cr",
+                  actionButton(
+                    inputId = ns("cr2dND"),
+                    label = "ND",
+                    style = "font-size : 2px; padding : 0px 2em 0px 2em; margin-left : 10px; background-color : #f39c12"
+                  )
+                )
+              ),
+              value = ifelse(is.null(hold), "", hold$Cr_after2d_adm),
+            )
+          ),
+          column(
+            width = 3,
+            textInput(
+              ns("FG_after2d_adm"),
+              placeholder = 'mg/dl',
+              HTML(
+                paste0(
+                  "Fasting glucose",
+                  actionButton(
+                    inputId = ns("fg2dND"),
+                    label = "ND",
+                    style = "font-size : 2px; padding : 0px 2em 0px 2em; margin-left : 10px; background-color : #f39c12"
+                  )
+                )
+              ),
+              value = ifelse(is.null(hold), "", hold$FG_after2d_adm),
+            )
+          )
+        ),
+        fluidRow(
+          h4("3 Day after"),
+          column(
+            width = 3,
+            dateInput(
+              ns("after3d_Date_adm"),
+              "Date",
+              value = lubridate::as_date(hold$after3d_Date_adm),
+              language = "ko"
+            )
+          ),
+          column(
+            width = 3,
+            textInput(
+              ns("BUN_after3d_adm"),
+              placeholder = 'mg/dl',
+              HTML(
+                paste0(
+                  "BUN",
+                  actionButton(
+                    inputId = ns("bun3dND"),
+                    label = "ND",
+                    style = "font-size : 2px; padding : 0px 2em 0px 2em; margin-left : 10px; background-color : #f39c12"
+                  )
+                )
+              ),
+              value = ifelse(is.null(hold), "", hold$BUN_after3d_adm),
+            )
+          ),
+          column(
+            width = 3,
+            textInput(
+              ns("Cr_after3d_adm"),
+              placeholder = 'mg/dl',
+              HTML(
+                paste0(
+                  "Cr",
+                  actionButton(
+                    inputId = ns("cr3dND"),
+                    label = "ND",
+                    style = "font-size : 2px; padding : 0px 2em 0px 2em; margin-left : 10px; background-color : #f39c12"
+                  )
+                )
+              ),
+              value = ifelse(is.null(hold), "", hold$Cr_after3d_adm),
+            )
+          ),
+          column(
+            width = 3,
+            textInput(
+              ns("FG_after3d_adm"),
+              placeholder = 'mg/dl',
+              HTML(
+                paste0(
+                  "Fasting glucose",
+                  actionButton(
+                    inputId = ns("fg3dND"),
+                    label = "ND",
+                    style = "font-size : 2px; padding : 0px 2em 0px 2em; margin-left : 10px; background-color : #f39c12"
+                  )
+                )
+              ),
+              value = ifelse(is.null(hold), "", hold$FG_after3d_adm),
+            )
+          )
+        ),
+        tags$div(
+          HTML(
+            paste0(
+              '<h3 style= "background:#3466A1; color:#FFFFFF; padding:0.3em;padding-bottom:0.6em;">',
               "Cardiac Enzyme",
               tags$div(
                 modalButton("", icon("times")),
@@ -1808,6 +2024,48 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
   observeEvent(input$clND, {
     updateTextInput(session, "Cl_adm", value = "ND")
   })
+  
+  observeEvent(input$bun1dND, {
+    updateTextInput(session, "BUN_after1d_adm", value = "ND")
+  })
+  
+  
+  observeEvent(input$bun2dND, {
+    updateTextInput(session, "BUN_after2d_adm", value = "ND")
+  })
+  
+  observeEvent(input$bun3dND, {
+    updateTextInput(session, "BUN_after3d_adm", value = "ND")
+  })
+  observeEvent(input$cr1dND, {
+    updateTextInput(session, "Cr_after1d_adm", value = "ND")
+  })
+  
+  
+  observeEvent(input$cr2dND, {
+    updateTextInput(session, "Cr_after2d_adm", value = "ND")
+  })
+  
+  observeEvent(input$cr3dND, {
+    updateTextInput(session, "Cr_after3d_adm", value = "ND")
+  })
+  
+  observeEvent(input$fg1dND, {
+    updateTextInput(session, "FG_after1d_adm", value = "ND")
+  })
+  
+  
+  observeEvent(input$fg2dND, {
+    updateTextInput(session, "FG_after2d_adm", value = "ND")
+  })
+  
+  observeEvent(input$fg3dND, {
+    updateTextInput(session, "FG_after3d_adm", value = "ND")
+  })
+  
+  
+  
+  
   observeEvent(input$CYfA, {
     updateRadioButtons(session, "Aspirin_adm", selected = "Yes")
     updateRadioButtons(session, "Trimetazidine_adm", selected = "Yes")
@@ -1933,6 +2191,20 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
         "K_adm" = ifelse(is.null(input$K_adm), "", input$K_adm),
         "Cl_adm" = ifelse(is.null(input$Cl_adm), "", input$Cl_adm),
         'hCG_adm' = ifelse(is.null(input$hCG_adm), '', input$hCG_adm),
+        
+        "after1d_Date_adm" = ifelse(is.null(input$after1d_Date_adm), "", lubridate::as_date(input$after1d_Date_adm)),
+        "BUN_after1d_adm" = ifelse(is.null(input$BUN_after1d_adm), "", input$BUN_after1d_adm),            
+        "Cr_after1d_adm"  = ifelse(is.null(input$Cr_after1d_adm), "", input$Cr_after1d_adm),            
+        "FG_after1d_adm"  = ifelse(is.null(input$FG_after1d_adm), "", input$FG_after1d_adm),
+        "after2d_Date_adm" = ifelse(is.null(input$after2d_Date_adm), "", lubridate::as_date(input$after2d_Date_adm)),
+        "BUN_after2d_adm" = ifelse(is.null(input$BUN_after2d_adm), "", input$BUN_after2d_adm),            
+        "Cr_after2d_adm"  = ifelse(is.null(input$Cr_after2d_adm), "", input$Cr_after2d_adm),            
+        "FG_after2d_adm"  = ifelse(is.null(input$FG_after2d_adm), "", input$FG_after2d_adm),
+        "after3d_Date_adm" = ifelse(is.null(input$after3d_Date_adm), "", lubridate::as_date(input$after3d_Date_adm)),
+        "BUN_after3d_adm" = ifelse(is.null(input$BUN_after3d_adm), "", input$BUN_after3d_adm),            
+        "Cr_after3d_adm"  = ifelse(is.null(input$Cr_after3d_adm), "", input$Cr_after3d_adm),            
+        "FG_after3d_adm"  = ifelse(is.null(input$FG_after3d_adm), "", input$FG_after3d_adm),
+        
         "BCK_adm" = ifelse(is.null(input$BCK_adm), "", input$BCK_adm),
         "BCKMB_adm" = ifelse(is.null(input$BCKMB_adm), "", input$BCKMB_adm),
         "BTroT_adm" = ifelse(is.null(input$BTroT_adm), "", input$BTroT_adm),
@@ -1994,6 +2266,7 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
       input$submit3,
       input$submit4,
       input$submit5,
+      input$submit6,
       input$submit7,
       input$submit8,
       input$submit9
@@ -2006,7 +2279,7 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
     eventExpr = callEdit(),
     valueExpr = {
       if (input$submit == 0 && input$submit1 == 0 && input$submit2 == 0 &&
-        input$submit3 == 0 && input$submit4 == 0 && input$submit5 == 0 &&
+        input$submit3 == 0 && input$submit4 == 0 && input$submit5 == 0 && input$submit6 == 0 &&
         input$submit7 == 0 && input$submit8 == 0 && 
         input$submit9 ==0) {
         return()

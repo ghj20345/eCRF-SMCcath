@@ -133,6 +133,17 @@ outc_edit_module <- function(input, output, session, modal_title, car_to_edit, m
               choices = c("Yes", "No"),
               selected = ifelse(is.na(hold$Trimetazidine_out),character(0), hold$Trimetazidine_out),
               inline = T
+            ),
+            conditionalPanel(
+              "input.Trimetazidine_out == 'Yes'",
+              ns = ns,
+              numericInput(
+                ns("Trimetazidine_dose_out"),
+                label = "Dose",
+                value = hold$Trimetazidine_dose_out,
+                min = 0,
+                step = 1
+              )
             )
           ),
           column(
@@ -153,6 +164,31 @@ outc_edit_module <- function(input, output, session, modal_title, car_to_edit, m
               choices = c("Yes", "No"),
               selected = ifelse(is.na(hold$Nitrate_out),character(0), hold$Nitrate_out),
               inline = T
+            ),
+            conditionalPanel(
+              "input.Nitrate_out == 'Yes'",
+              ns = ns,
+              fluidRow(
+                column(
+                  width = 6,
+                  textInput(
+                    ns("Nitrate_name_out"),
+                    label = "Name",
+                    value = hold$Nitrate_name_out
+                  )
+                ),
+                column(
+                  width = 6,
+                  numericInput(
+                    ns("Nitrate_dose_out"),
+                    label = "Dose",
+                    value = hold$Nitrate_dose_out,
+                    min = 0,
+                    max = 200,
+                    step = 1
+                  )
+                )
+              )
             )
           )
         ),
@@ -165,6 +201,17 @@ outc_edit_module <- function(input, output, session, modal_title, car_to_edit, m
               choices = c("Yes", "No"),
               selected = ifelse(is.na(hold$Prasugrel_out),character(0), hold$Prasugrel_out),
               inline = T
+            ),
+            conditionalPanel(
+              "input.Prasugrel_out == 'Yes'",
+              ns = ns,
+              numericInput(
+                ns("Prasugrel_dose_out"),
+                label = "Dose",
+                value = hold$Prasugrel_dose_out,
+                min = 0,
+                step = 1
+              )
             )
           ),
           
@@ -176,6 +223,17 @@ outc_edit_module <- function(input, output, session, modal_title, car_to_edit, m
               choices = c("Yes", "No"),
               selected = ifelse(is.na(hold$Ticagrelor_out),character(0), hold$Ticagrelor_out),
               inline = T
+            ),
+            conditionalPanel(
+              "input.Ticagrelor_out == 'Yes'",
+              ns = ns,
+              numericInput(
+                ns("Ticagrelor_dose_out"),
+                label = "Dose",
+                value = hold$Ticagrelor_dose_out,
+                min = 0,
+                step = 1
+              )
             )
           ),
           column(
@@ -186,6 +244,17 @@ outc_edit_module <- function(input, output, session, modal_title, car_to_edit, m
               choices = c("Yes", "No"),
               selected = ifelse(is.na(hold$Wafarin_out),character(0), hold$Wafarin_out),
               inline = T
+            ),
+            conditionalPanel(
+              "input.Wafarin_out == 'Yes'",
+              ns = ns,
+              numericInput(
+                ns("Wafarin_dose_out"),
+                label = "Dose",
+                value = hold$Wafarin_dose_out,
+                min = 0,
+                step = 1
+              )
             )
           ),
           column(
@@ -196,6 +265,17 @@ outc_edit_module <- function(input, output, session, modal_title, car_to_edit, m
               choices = c("Yes", "No"),
               selected = ifelse(is.na(hold$Nicorandil_out),character(0), hold$Nicorandil_out),
               inline = T
+            ),
+            conditionalPanel(
+              "input.Nicorandil_out == 'Yes'",
+              ns = ns,
+              numericInput(
+                ns("Nicorandil_dose_out"),
+                label = "Dose",
+                value = hold$Nicorandil_dose_out,
+                min = 0,
+                step = 1
+              )
             )
           )
         ),
@@ -313,6 +393,17 @@ outc_edit_module <- function(input, output, session, modal_title, car_to_edit, m
               choices = c("Yes", "No"),
               selected = ifelse(is.na(hold$Insulin_out),character(0), hold$Insulin_out),
               inline = T
+            ),
+            conditionalPanel(
+              "input.Insulin_out == 'Yes'",
+              ns = ns,
+              numericInput(
+                ns("Insulin_dose_out"),
+                label = "Dose",
+                value = hold$Insulin_dose_out,
+                min = 0,
+                step = 1
+              )
             )
           )
         ),
@@ -580,6 +671,42 @@ outc_edit_module <- function(input, output, session, modal_title, car_to_edit, m
                     value = hold$Alpha_dose_out,
                     min = 0,
                     max = 200,
+                    step = 1
+                  )
+                )
+              )
+            )
+          )
+        ),
+        fluidRow(
+          column(
+            width = 3,
+            radioButtons(
+              ns("Entresto_out"),
+              label = "Entresto",
+              choices = c("Yes" = "Yes", "No" = "No"),
+              selected = ifelse(is.na(hold$Entresto_out),character(0), hold$Entresto_out),
+              inline = T
+            ),
+            conditionalPanel(
+              "input.Entresto_out == 'Yes'",
+              ns = ns,
+              fluidRow(
+                column(
+                  width = 6,
+                  textInput(
+                    ns("Entresto_name_out"),
+                    label = "Name",
+                    value = hold$Entresto_name_out
+                  )
+                ),
+                column(
+                  width = 6,
+                  numericInput(
+                    ns("Entresto_dose_out"),
+                    label = "Dose",
+                    value = hold$Entresto_dose_out,
+                    min = 0,
                     step = 1
                   )
                 )
@@ -1251,15 +1378,22 @@ outc_edit_module <- function(input, output, session, modal_title, car_to_edit, m
         
         "Aspirin_out" = ifelse(is.null(input$Aspirin_out), "", input$Aspirin_out),
         "Trimetazidine_out" = ifelse(is.null(input$Trimetazidine_out), "", input$Trimetazidine_out),
+        "Trimetazidine_dose_out" = ifelse(is.null(input$Trimetazidine_dose_out), '', input$Trimetazidine_dose_out),
         "Clopidogrel_out" = ifelse(is.null(input$Clopidogrel_out), "", input$Clopidogrel_out),
         "Nitrate_out" = ifelse(is.null(input$Nitrate_out), "", input$Nitrate_out),
+        "Nitrate_name_out" = ifelse(is.null(input$Nitrate_name_out), "", input$Nitrate_name_out),
+        "Nitrate_dose_out" = ifelse(is.null(input$Nitrate_dose_out), "", input$Nitrate_dose_out),
         "Nicorandil_out" = ifelse(is.null(input$Nicorandil_out), "", input$Nicorandil_out),
+        "Nicorandil_dose_out" = ifelse(is.null(input$Nicorandil_dose_out), '', input$Nicorandil_dose_out),
         "Prasugrel_out" = ifelse(is.null(input$Prasugrel_out), "", input$Prasugrel_out),
+        "Prasugrel_dose_out" = ifelse(is.null(input$Prasugrel_dose_out), '', input$Prasugrel_dose_out),
         "Statin_out" = ifelse(is.null(input$Statin_out), "", input$Statin_out),
         "Statin_name_out" = ifelse(is.null(input$Statin_name_out), "", input$Statin_name_out),
         "Statin_dose_out" = ifelse(is.null(input$Statin_dose_out), "", input$Statin_dose_out),
         "Ticagrelor_out" = ifelse(is.null(input$Ticagrelor_out), "", input$Ticagrelor_out),
+        "Ticagrelor_dose_out" = ifelse(is.null(input$Ticagrelor_dose_out), '', input$Ticagrelor_dose_out),
         'Wafarin_out' = ifelse(is.null(input$Wafarin_out), '', input$Wafarin_out),
+        "Wafarin_dose_out" = ifelse(is.null(input$Wafarin_dose_out), '', input$Wafarin_dose_out),
         'NOAC_out' = ifelse(is.null(input$NOAC_out), '', input$NOAC_out),
         'NOAC_name_out' = ifelse(is.null(input$NOAC_name_out), '', input$NOAC_name_out),
         'NOAC_dose_out' = ifelse(is.null(input$NOAC_dose_out), '', input$NOAC_dose_out),
@@ -1290,6 +1424,11 @@ outc_edit_module <- function(input, output, session, modal_title, car_to_edit, m
         'Alpha_name_out' = ifelse(is.null(input$Alpha_name_out), '', input$Alpha_name_out),
         'Alpha_dose_out' = ifelse(is.null(input$Alpha_dose_out), '', input$Alpha_dose_out),
         'Insulin_out' = ifelse(is.null(input$Insulin_out), '', input$Insulin_out),
+        "Insulin_dose_out" = ifelse(is.null(input$Insulin_dose_out), "", input$Insulin_dose_out),
+        "Entresto_out" = ifelse(is.null(input$Entresto_out), "", input$Entresto_out),
+        "Entresto_name_out" = ifelse(is.null(input$Entresto_name_out), "", input$Entresto_name_out),
+        "Entresto_dose_out" = ifelse(is.null(input$Entresto_dose_out), "", input$Entresto_dose_out),
+        
         
         "Events_out" = ifelse(is.null(input$Events_out), "", input$Events_out),
         "Events_detail_out" = ifelse(is.null(input$Events_detail_out),"", paste0(input$Events_detail_out, collapse = ',')),
