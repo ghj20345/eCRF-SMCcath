@@ -30,8 +30,6 @@ cars_table_module_ui <- function(id) {
         actionButton(
           ns("add_patient"),
           "Add Patient",
-          class = "btn-success",
-          style = "color: #fff;",
           icon = icon("plus"),
           width = "100%"
         ),
@@ -146,7 +144,6 @@ cars_table_module <- function(input, output, session, tbl = "rct", sessionid) {
 
   observeEvent(cars(), {
     out <- cars() # one observation
-
     ids <- out$pid
 
     # data에 입력 없을시 Error
@@ -525,7 +522,7 @@ cars_table_module <- function(input, output, session, tbl = "rct", sessionid) {
       `3m-fu` = m3,
       `6m-fu` = m6,
       `scv` = mf,
-      out[,(ncol(out)-4):ncol(out)] # Created at, Created by, Modified at, Modified by
+      out[, c("created_at", "created_by", "modified_at", "modified_by")] # Created at, Created by, Modified at, Modified by
     )
     
     # Data is empty
@@ -536,16 +533,26 @@ cars_table_module <- function(input, output, session, tbl = "rct", sessionid) {
     } else {
       # table has already rendered, so use DT proxy to update the data in the
       # table without rerendering the entire table
+
       replaceData(car_table_proxy, out, resetPaging = FALSE, rownames = FALSE)
     }
+    
+    callModule(
+      patientsNumber_plot_module,
+      "Hospital1",
+      data = out[, c("Center", "created_at")]
+    )
+    
+    callModule(
+      patientsByDate_plot_module,
+      "Date",
+      data = out[, c("Center", "created_at")]
+    )
   })
-
-  
   
   output$car_table <- renderDT({
     req(car_table_prep())
     out <- car_table_prep()
-
     datatable(
       out,
       rownames = FALSE,

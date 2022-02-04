@@ -1,59 +1,75 @@
 source("global.R")
 library(shinymanager)
-library(bslib)
-library(bs4Dash)
+library(shinydashboard)
+library(shinydashboardPlus)
 # credentials <- data.frame(
 #  user = c("admin", "chkh"),
 #  password = c("zarathuadmin", "chkh"),
 #  admin = c(T, F),
 #  stringsAsFactors = FALSE
 # )
+options(shiny.fullstacktrace = TRUE)
 
 # create_db(credentials_data = credentials, sqlite_path = "data/database.sqlite")
 
 ui <- dashboardPage(
-    title = "Basic Dashboard",
-    fullscreen = TRUE,
-    header = dashboardHeader(
-      title = dashboardBrand(
-        title = "bs4Dash",
-        color = "primary",
-        href = "https://www.google.fr",
-        image = "https://adminlte.io/themes/AdminLTE/dist/img/user2-160x160.jpg"
-      ),
-      skin = "light",
-      status = "white",
-      border = TRUE,
-      sidebarIcon = icon("bars"),
-      controlbarIcon = icon("th"),
-      fixed = FALSE
-    ),
+    skin = "black",
+    title = "eCRF DashBoard",
+    header = dashboardHeader(title = "eCRF DashBoard"),
     sidebar = dashboardSidebar(
-      skin = "light",
-      status = "primary",
-      elevation = 3,
-      sidebarUserPanel(
-        image = "https://image.flaticon.com/icons/svg/1149/1149168.svg",
-        name = "Welcome Onboard!"
-      ),
       sidebarMenu(
         menuItem(
-          "Item 1",
-          tabName = "item1",
-          icon = icon("sliders")
+          "Dashboard",
+          tabName = "Dashboard",
+          icon = icon("dashboard")
         ),
         menuItem(
-          "Item 2",
-          tabName = "item2",
-          icon = icon("id-card")
+          "eCRF",
+          tabName = "eCRF",
+          icon = icon("th")
         )
       )
     ),
     body = dashboardBody(
+      shinyFeedback::useShinyFeedback(),
+      shinyjs::useShinyjs(),
+      tags$head(
+        tags$link(rel = "stylesheet", type = "text/css", href = "bootstrap.css")
+      ),
       tabItems(
         tabItem(
-          tabName = "item2",
-          cars_table_module_ui("table_rct")
+          tabName ="Dashboard",
+          tabsetPanel(
+            id = "chart_panel",
+            selected = NULL,
+            tabPanel(
+              title = "RCT",
+              patientsNumber_plot_module_ui("table_rct-Hospital1"),
+              date_select_module_ui("table_rct-Date-date_selector"),
+              patientsByDate_plot_module_ui("table_rct-Date")
+            ),
+            tabPanel(
+              title = "Pros",
+              patientsNumber_plot_module_ui("table_pros-Hospital1"),
+              date_select_module_ui("table_pros-Date-date_selector"),
+              patientsByDate_plot_module_ui("table_pros-Date")
+            )
+          )
+        ),
+        tabItem(
+          tabName = "eCRF",
+          tabsetPanel(
+            id = "editer_panel",
+            selected = NULL,
+            tabPanel(
+              title = "RCT",
+              cars_table_module_ui("table_rct")
+            ),
+            tabPanel(
+              title = "Pros",
+              cars_table_module_ui("table_pros")
+            )
+          )
         )
       )
    )
