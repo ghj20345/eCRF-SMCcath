@@ -2254,6 +2254,9 @@ adm_edit_module <- function(input, output, session, modal_title, car_to_edit, mo
 
     out$data$modified_at <- time_now
     out$data$modified_by <- sessionid
+    
+    log_data("EDIT", out$data)
+    
     out
   })
 

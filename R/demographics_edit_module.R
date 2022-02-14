@@ -431,6 +431,8 @@ demographics_edit_module <- function(input, output, session, modal_title, car_to
 
     dat$modified_at <- time_now
     dat$modified_by <- sessionid
+    
+    log_data("EDIT", dat)
 
     return(dat)
   })

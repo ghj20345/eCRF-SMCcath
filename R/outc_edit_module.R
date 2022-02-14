@@ -1488,6 +1488,9 @@ outc_edit_module <- function(input, output, session, modal_title, car_to_edit, m
 
     out$data$modified_at <- time_now
     out$data$modified_by <- sessionid
+    
+    log_data("EDIT", out$data)
+    
     out
   })
 

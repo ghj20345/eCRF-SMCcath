@@ -63,6 +63,9 @@ car_delete_module <- function(input, output, session, modal_title, car_to_delete
         paste0("DELETE FROM ", tbl," WHERE pid=$1"),
         params = c(pid)
       )
+      
+      dat = list("PID" = pid)
+      log_data("DELETE", dat)
 
       session$userData$mtcars_trigger(session$userData$mtcars_trigger() + 1)
       showToast("success", "Patient Successfully Deleted")

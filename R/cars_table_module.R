@@ -37,6 +37,7 @@ cars_table_module_ui <- function(id) {
         tags$br()
       )
     ),
+    shiny::downloadButton(ns('downloadLog'), "Log"),
     fluidRow(
       column(
         width = 12,
@@ -137,6 +138,15 @@ cars_table_module <- function(input, output, session, tbl = "rct", sessionid) {
     },
     content = function(file){
       write.csv(cars(), file)
+    }
+  )
+  
+  output$downloadLog <- shiny::downloadHandler(
+    filename = function(){
+      paste("log-", Sys.Date(), ".txt", sep="")
+    },
+    content = function(file){
+      file.copy("data_entry.log", file)
     }
   )
   

@@ -1,4 +1,3 @@
-
 #' Enroll Add & Edit Module
 #'
 #' Module to add & initial edit
@@ -19,7 +18,7 @@
 #'
 add_initialedit_module <- function(input, output, session, modal_title, car_to_edit, modal_trigger, tbl = "rct", sessionid, data, rd = rd) {
   ns <- session$ns
-  
+
   observeEvent(modal_trigger(), {
     hold <- car_to_edit()
     
@@ -541,6 +540,7 @@ add_initialedit_module <- function(input, output, session, modal_title, car_to_e
       dat$modified_at <- time_now
       dat$modified_by <- sessionid
       
+      log_data("ADD", dat)
       return(dat)
     })
     
@@ -548,7 +548,6 @@ add_initialedit_module <- function(input, output, session, modal_title, car_to_e
       dat <- edit_car_dat()
       
       # Logic to validate inputs...
-      
       dat
     })
     
